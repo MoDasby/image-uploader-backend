@@ -9,4 +9,4 @@ Get an image by identifier: Retrieve an image using its unique identifier.
 
 ## Technologies
 
-This app uses Spring boot, PostgreSQL and Docker
+This app uses Spring boot and PostgreSQL
