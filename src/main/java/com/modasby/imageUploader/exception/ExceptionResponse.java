@@ -1,15 +1,9 @@
 package com.modasby.imageUploader.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
 
-import java.util.Date;
-
-@AllArgsConstructor @Getter @Setter
-public class ExceptionResponse {
-
-    private Date timestamp;
-    private String message;
-    private String description;
+public record ExceptionResponse(
+        Instant timestamp,
+        String message
+) {
 }

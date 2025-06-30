@@ -1,12 +1,17 @@
-# Image uploader backend
+# Image uploader
 
-An API built in Java to serve the [Image Uploader](https://github.com/MoDasby/image-uploader) challenge.
+Uma API Rest construída em Java e Spring Boot para upload e recuperação segura de imagens, utilizando as melhores práticas de armazenamento em nuvem com a AWS.
 
-## Features
+## Visão Geral da Arquitetura
 
-- Upload an image: Allows users to upload an image to the server.  
-- Get an image by identifier: Retrieve an image using its unique identifier.
+- Upload de imagem: Permite o envio de imagens para a API, que as armazena no AWS S3.
+- Recuperação de imagem: Permite a recuperação de imagens armazenadas, garantindo que apenas usuários autorizados possam acessá-las.
 
 ## Techs
 
-This app uses Spring boot and PostgreSQL
+- Java 22
+- Spring boot
+- Spring Data JPA
+- PostgreSQL
+- AWS S3
+- Apache Tika

@@ -1,35 +1,26 @@
 package com.modasby.imageUploader.controller;
 
-import com.modasby.imageUploader.model.File;
-import com.modasby.imageUploader.service.FileStorageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import com.modasby.imageUploader.service.ImageService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/image")
 public class ImageController {
 
-    @Autowired
-    FileStorageService fileStorageService;
+    private final ImageService imageService;
 
-    @GetMapping("/image/{id}")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable("id") String id, HttpServletRequest request) {
-        File file = fileStorageService.getFile(id);
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.valueOf(file.getContentType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + file.getName() + "\"")
-                .body(file.getData());
+    public ImageController(ImageService imageService) {
+        this.imageService = imageService;
     }
 
-    @PostMapping("/image/upload")
-    public ResponseEntity<?> saveFile(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(fileStorageService.saveFile(file));
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getImage(@PathVariable String id) {
+        return ResponseEntity.status(303)
+                .header("Location", imageService.getImageUrl(id))
+                .build();
     }
 }
